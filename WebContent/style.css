@@ -1,15 +1,15 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #FFFFFA;
+	background-color: #22c9bbe9;
 	font-family:sans-serif;
   }
 h1{
-	color:#471F1B;
+	color:#d47800;
 }
 .header{
 	height: 50px;
-	background-color:#E02312;
+	background-color:#510101;
 }
 .buttonContainer{
 	margin: 0 auto;
@@ -18,7 +18,7 @@ h1{
 .b1{
 	height: 50px;
 	width: 200px;
-	color: #FFFFFA;
+	color: #fffdfa;
 	border: none;
 	font-size: 30px;
 	display: block;

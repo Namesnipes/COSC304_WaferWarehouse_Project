@@ -90,9 +90,9 @@ else
 	 	+ "<p style=\"margin: 0;\"><b>Product ID " + product.get(0) + "</b><br>" + product.get(1) + "</p>"
   		+ "</div>");
 		out.print("<div class=\"quantityInfo\">"
-		+ "<button type=\"button\" onclick=\"location.href='addcart.jsp?id=" + product.get(0) + "&name=add';\">+</button>"
-		+ "<p style=\"display: inline-block;width: 20px;text-align: center;\">" + qty + "</p>"
 		+ "<button type=\"button\" onclick=\"location.href='?minus="+ product.get(0) + "';\">-</button>"
+		+ "<p style=\"display: inline-block;width: 20px;text-align: center;\">" + qty + "</p>"
+		+ "<button type=\"button\" onclick=\"location.href='addcart.jsp?id=" + product.get(0) + "&name=add';\">+</button>"
 	 	+ "</div>");
 		out.print("<div class=\"priceInfo\">"
         + "<b style=\"display:block;\">" + currFormat.format(pr) + "</b>"
