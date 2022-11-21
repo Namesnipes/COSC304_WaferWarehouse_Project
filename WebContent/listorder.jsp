@@ -49,7 +49,7 @@ try
 
 	String sql = "SELECT * FROM ordersummary O JOIN customer C ON O.customerId = C.customerId";
 	Statement stmt = con.createStatement();
-	out.println("<table border='4'><tr style='background-color:rgb(13, 238, 13);color:orangered'><td><th>Order Id</th></td><td><th>Customer Id</th></td><td><th>Customer Name</th></td><td><th>Total Amount</th></td></tr></table>");
+	out.println("<table border='1' width='300' cellspacing='10' cellpadding='5'><tr style='background-color:rgb(18, 112, 84);color:rgb(66, 28, 14)'><th>Order Id</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th></tr>");
 	ResultSet rst = stmt.executeQuery(sql);
 
 	// Query to retrieve product info from each order
@@ -64,11 +64,12 @@ try
 		String total = currFormat.format(rst.getDouble("totalAmount"));
 
 
-		out.println("<table border='2'><tr><td><th>"+orderId
-						+"\t</th></td><td><th>"+customerId
-						+"\t</th></td><td><th>"+name
-						+"\t</th></td><td><th>"+total
-						+"</th></td></tr></table>");
+		out.println("<table border='3' width='300' cellspacing='5' cellpadding='2'>"
+						+"<tr><td><th>"+orderId+"</th></td>"
+						+"<td><th>"+customerId+"</th></td>"
+						+"<td><th>"+name+"</th></td>"
+						+"<td><th>"+total+"</th></td></tr>"
+						+"</table>");
 
 		pstmt.setInt(1, Integer.parseInt(orderId));
 		ResultSet rst2 = pstmt.executeQuery();
@@ -82,7 +83,7 @@ try
 			+ rst2.getString("Quantity")+"\t\t"
 			+ price);
 		}
-		out.println();
+		out.println("</table>");
 	}
 
 	// For each order in the ResultSet

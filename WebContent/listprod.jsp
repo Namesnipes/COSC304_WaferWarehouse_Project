@@ -7,7 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./style.css">
-<title>Wacky Wafer Warehouse</title>
+<title>The Wacky Wafer Warehouse</title>
 </head>
 <body>
 <h1 style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: dashed;"> The Wacky Wafer Warehouse </h1>
@@ -40,15 +40,14 @@ catch (java.lang.ClassNotFoundException e)
 
 //Connect to database
 getConnection();
-out.println("Product Name, Price");
 
 //set db to orders
 con.setCatalog("orders");
 
-//I should use this and I didnt use it but its here
 // Useful code for formatting currency values:
 // NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 // out.println(currFormat.format(5.0);	// Prints $5.00
+
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 //return all products from the db that match what the user searched
@@ -56,6 +55,9 @@ String sql = "SELECT * FROM product WHERE productName LIKE ?";
 PreparedStatement stmt = con.prepareStatement(sql);
 stmt.setString(1,"%" + name + "%");
 ResultSet rst = stmt.executeQuery();
+out.print("<table border=\"3\" width=\"300\" cellspacing=\"10\" cellpadding=\"10\">");
+
+out.print("<thead><tr><th></th><th>Product Name</th><th>Price</th></thead></tr>");
 
 //display those bad boys (products)
 while(rst.next()){
@@ -64,15 +66,17 @@ while(rst.next()){
 	String productPrice = rst.getString("productPrice");
 	String productImg = rst.getString("productImageURL");
 	if(productImg == null) productImg = "";
+
 	//using urlencoder is overkill apparently you could just surround the productname in double quotes ("") but its too late now
 	String url = "addcart.jsp?id=" + 
 					URLEncoder.encode(productId, StandardCharsets.UTF_8) + "&name=" +
 					URLEncoder.encode(productName, StandardCharsets.UTF_8) + "&price=" +
 					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
-	out.print("<a href='" + url + "'> Add to cart </a>");
-	out.println(rst.getString("productName") + " " + rst.getString("productPrice"));
+	out.print("<tr><td><a href='"+url+"'> Add to cart </a></td>");
+	out.print("<td>"+rst.getString("productName")+"</td><td>"+currFormat.format(rst.getDouble("productPrice"))+"</td></tr>");
 }
+out.println("</table>");
 
 closeConnection();
 

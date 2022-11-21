@@ -28,7 +28,7 @@ h1{
 	line-height: 50px;
 }
 .b1:active{
-	background-color: red;
+	background-color: rgb(151, 0, 0);
 }
 .item{
 	height: 100px;

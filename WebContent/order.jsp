@@ -10,7 +10,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="style.css">
 <title>Wacky Wafer Warehouse Order Processing</title>
+<h1 style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: dashed;"> The Wacky Wafer Warehouse </h1>
+<div class="header">
+	<div class="buttonContainer">
+		<a href = "shop.html" class="b1"> Home </a>
+	</div>
+</div>
 </head>
 <body>
 <pre>
@@ -35,14 +42,14 @@ try{
 
 	int numResults = rst.getInt(1);
 	if(numResults == 1){
-		out.println("valid id");
+		out.println("<h1>Wacky ID accepted!</h1>");
 		valid = true;
 	} else {
-		out.println("valid id not entered");
+		out.println("<header>Wacky entry! However, you've entered an invalid ID.</header>");
 		return;
 	}
 } catch(Exception e){
-	out.println(custId + " is not a valid id");
+	out.println(custId + "isn't wacky enough! Please enter another wacky (and valid) ID!");
 	return;
 }
 

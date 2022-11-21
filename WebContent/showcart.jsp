@@ -54,6 +54,7 @@ else
 	out.print("<div class=\"wrapper\">");
 	out.println("<h1>Your Shopping Cart 🛒</h1>");
 	double total =0;
+
 	Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
 	while (iterator.hasNext()) 
 	{	Map.Entry<String, ArrayList<Object>> entry = iterator.next();
@@ -112,5 +113,4 @@ else
 }
 %>
 </body>
-</html> 
-
+</html>
