@@ -45,7 +45,7 @@ if(minus != null){
 }
 
 if (productList == null)
-{	out.println("<H1>Your shopping cart is empty!</H1>");
+{	out.println("<h1>Your shopping cart is empty!</h1>");
 	productList = new HashMap<String, ArrayList<Object>>();
 }
 else
@@ -85,6 +85,7 @@ else
 		{
 			out.println("Invalid quantity for product: "+product.get(0)+" quantity: "+qty);
 		}
+		
 		out.println("<div class=\"shoppingCartItem\">");
 		out.println("<div class=\"cartImg\" style=\"background-image: url(./imgs/" + product.get(4) + ")\"></div>");
 		out.print("<div class=\"cartInfo\">"
@@ -103,6 +104,7 @@ else
 		  + "<b style=\"display:block;\"> x" + qty + " = "+ currFormat.format(pr*qty) + "</b>"
 			+ "</div></div>");
 		total = total +pr*qty;
+		
 	}
 	out.print("<div class=\"total\">");
 	out.println("Total: " + currFormat.format(total));
