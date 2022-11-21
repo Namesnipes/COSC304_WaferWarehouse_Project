@@ -1,11 +1,11 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #F5FFFF;
+	background-color: rgb(255, 220, 255);
 	font-family:sans-serif;
   }
 h1{
-	color:#d47800;
+	color:#ffa939;
 }
 .header{
 	height: 50px;

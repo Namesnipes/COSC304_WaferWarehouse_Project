@@ -49,7 +49,7 @@ try{
 		return;
 	}
 } catch(Exception e){
-	out.println(custId + "isn't wacky enough! Please enter another wacky (and valid) ID!");
+	out.println("The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!");
 	return;
 }
 
@@ -87,7 +87,13 @@ keys.next();
 int orderId = keys.getInt(1);
 
 //insert each product seperately into orderproduct table
-String outString = "";
+NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+out.print("<table border='3' width='500' cellspacing='2'>"
+	+ "<tr><th style='text-align: center' width='10%'>Product ID</th>"
+	+ "<th style='text-align: center' width='50%'>Product Name</th>"
+	+ "<th style='text-align: center' width='10%'>Quantity</th>"
+	+ "<th style='text-align: center' width='15'>Price</th>"
+	+ "<th style='text-align: center' width='15'>Total</th></tr>");
 Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
 while (iterator.hasNext()) {
 	Map.Entry<String, ArrayList<Object>> entry = iterator.next();
@@ -99,7 +105,7 @@ while (iterator.hasNext()) {
 	try{
 		double pr = Double.parseDouble(price);
 		int qty = ( (Integer)product.get(3)).intValue();
-		outString += productId + " " + productName + " " + qty + " " + price + "\n";
+		out.print("<tr><td>"+productId+"</td><td>"+productName+"</td><td>"+qty+"</td><td>"+currFormat.format(pr)+"</td></tr>");
 		insertProductSQL += "INSERT INTO orderproduct (orderId,productId,quantity,price) VALUES (?,?,?,?)";
 		PreparedStatement pstmt3 = con.prepareStatement(insertProductSQL);
 		pstmt3.setInt(1,orderId);
@@ -115,15 +121,7 @@ while (iterator.hasNext()) {
 }
 }
 
-out.print("<table border='3' width='400' cellspacing='2'>"
-	+ "<tr><th style='text-align: center'><td>Product ID</td></th></t>"
-	+ "<th>Product Name</th>"
-	+ "<th>Quantity</th>"
-	+ "<th>Price</th>"
-	+ "<th>Subtotal</th></tr>");
-out.println("Product Id	Product Name	Quantity	Price	Subtotal");
-out.println(outString);
-out.println("Order Total:" + total);
+out.println("<tr><td></td><td></td><td></td><td></td><td>"+currFormat.format(total)+"</td></tr></table>");
 out.println("Order completed. Will be shipped soon...");
 out.println("Your order number: " + orderId);
 out.println("Shipping to customer: " + custId + " " + rst.getString(2) + " " + rst.getString(3));
