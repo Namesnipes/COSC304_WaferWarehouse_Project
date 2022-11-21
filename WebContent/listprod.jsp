@@ -62,11 +62,14 @@ while(rst.next()){
 	String productId = rst.getString("productId");
 	String productName = rst.getString("productName");
 	String productPrice = rst.getString("productPrice");
+	String productImg = rst.getString("productImageURL");
+	if(productImg == null) productImg = "";
 	//using urlencoder is overkill apparently you could just surround the productname in double quotes ("") but its too late now
 	String url = "addcart.jsp?id=" + 
 					URLEncoder.encode(productId, StandardCharsets.UTF_8) + "&name=" +
 					URLEncoder.encode(productName, StandardCharsets.UTF_8) + "&price=" +
-					URLEncoder.encode(productPrice, StandardCharsets.UTF_8);
+					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
+					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
 	out.print("<a href='" + url + "'> Add to cart </a>");
 	out.println(rst.getString("productName") + " " + rst.getString("productPrice"));
 }

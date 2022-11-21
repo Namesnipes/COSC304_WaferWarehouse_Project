@@ -85,7 +85,7 @@ else
 			out.println("Invalid quantity for product: "+product.get(0)+" quantity: "+qty);
 		}
 		out.println("<div class=\"shoppingCartItem\">");
-		out.println("<div class=\"cartImg\" style=\"background-image: url(https://spaceshipsandlaserbeams.com/wp-content/uploads/2016/09/donut-sandwich-recipe-card.jpg)\"></div>");
+		out.println("<div class=\"cartImg\" style=\"background-image: url(./imgs/" + product.get(4) + ")\"></div>");
 		out.print("<div class=\"cartInfo\">"
 	 	+ "<p style=\"margin: 0;\"><b>Product ID " + product.get(0) + "</b><br>" + product.get(1) + "</p>"
   		+ "</div>");
