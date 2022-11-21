@@ -7,7 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./style.css">
-<title>YOUR NAME Grocery</title>
+<title>Wacky Wafer Warehouse</title>
 </head>
 <body>
 <div class="header">

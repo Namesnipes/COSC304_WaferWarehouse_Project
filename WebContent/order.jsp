@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery Order Processing</title>
+<title>Wacky Wafer Warehouse Order Processing</title>
 </head>
 <body>
 <pre>

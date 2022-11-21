@@ -7,7 +7,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./style.css">
-<title>Dylans Grocery Order List</title>
+<title>Wacky Wafer Warehouse Order List</title>
 </head>
 <body>
 <div class="header">
