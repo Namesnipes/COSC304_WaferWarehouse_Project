@@ -116,8 +116,11 @@ while (iterator.hasNext()) {
 }
 
 out.print("<table border='3' width='400' cellspacing='2'>"
-	+ "<tr><th style='text-align: center'>Product ID</th></tr>"
-	+ ");
+	+ "<tr><th style='text-align: center'><td>Product ID</td></th></t>"
+	+ "<th>Product Name</th>"
+	+ "<th>Quantity</th>"
+	+ "<th>Price</th>"
+	+ "<th>Subtotal</th></tr>");
 out.println("Product Id	Product Name	Quantity	Price	Subtotal");
 out.println(outString);
 out.println("Order Total:" + total);
