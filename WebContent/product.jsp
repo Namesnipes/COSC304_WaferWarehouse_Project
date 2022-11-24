@@ -15,11 +15,24 @@
 <%
 // Get product name to search for
 // TODO: Retrieve and display info for the product
-// String productId = request.getParameter("id");
 
-String sql = "";
 
-// TODO: If there is a productImageURL, display using IMG tag
+
+try{
+    
+    String productId = request.getParameter("id");
+    
+    String sql = "SELECT * FROM product WHERE productId = ?";
+    PreparedStatement pstmt = con.prepareStatement(sql);
+    pstmt.setString(1, productId);
+    ResultSet rst = pstmt.executeQuery();
+
+    // TODO: If there is a productImageURL, display using IMG tag
+
+} catch (Exception ex) {
+    out.println(ex);
+}
+
 		
 // TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
 		
