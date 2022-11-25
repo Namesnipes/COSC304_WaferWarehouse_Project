@@ -1,2 +1,6 @@
-<H1 align="center"><font face="cursive" color="#3399FF"><a href="index.jsp">Ray's Grocery</a></font></H1>      
-<hr>
+<h1 style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: dashed;"> The Wacky Wafer Warehouse </h1>
+<div class="header">
+	<div class="buttonContainer">
+		<a href = "shop.html" class="b1"> Home </a>
+	</div>
+</div>

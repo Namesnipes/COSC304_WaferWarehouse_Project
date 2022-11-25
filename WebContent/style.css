@@ -38,7 +38,7 @@ h1{
 }
 
 .cartImg{
-	height:inherit;
+	height:100px;
 	width:100px;
 	background-size: cover;
 	float:left;
