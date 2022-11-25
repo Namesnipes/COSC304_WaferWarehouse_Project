@@ -14,11 +14,18 @@
 %>
 
 <%
+getConnection();
+con.setCatalog("orders");
 
 // TODO: Print Customer information
-String sql = "";
+String sql = "SELECT customerId, firstName, lastName, email, phonenum, address, city, state, postalCode, country, userId"
+	+	" FROM customer WHERE userId = ? AND password = ?";
+PreparedStatement pstmt = con.prepareStatement(sql);
+pstmt.setString(1, userName);
+ResultSet rst = pstmt.executeQuery();
 
 // Make sure to close connection
+closeConnection();
 %>
 
 </body>
