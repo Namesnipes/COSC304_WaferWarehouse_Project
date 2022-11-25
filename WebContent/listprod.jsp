@@ -73,8 +73,11 @@ while(rst.next()){
 					URLEncoder.encode(productName, StandardCharsets.UTF_8) + "&price=" +
 					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
-	out.print("<tr><td><a href='"+url+"'> Add to cart </a></td>");
-	out.print("<td>"+rst.getString("productName")+"</td><td>"+currFormat.format(rst.getDouble("productPrice"))+"</td></tr>");
+
+	String productPage = "product.jsp?id=" + URLEncoder.encode(productId, StandardCharsets.UTF_8);
+	out.print("<tr><td><a href='"+url+"'>Add to cart</a></td>");
+	out.print("<td><a href='"+productPage+"'>"+productName+"</a></td>"
+		+	"</td><td>"+currFormat.format(rst.getDouble("productPrice"))+"</td></tr>");
 }
 out.println("</table>");
 
