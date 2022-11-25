@@ -7,6 +7,7 @@
 	try
 	{
 		authenticatedUser = validateLogin(out,request,session);
+		out.print(authenticatedUser);
 	}
 	catch(IOException e)
 	{	System.err.println(e); }
@@ -33,16 +34,28 @@
 		try 
 		{
 			getConnection();
-			
-			// TODO: Check if userId and password match some customer account. If so, set retStr to be the username.
-			retStr = "";			
+			con.setCatalog("orders");
+			String sql = "SELECT * FROM customer WHERE userid = ? AND password = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rst = pstmt.executeQuery();
+			if(rst.next()){
+				retStr = new String(username);
+			} else {
+				retStr = null;
+			}		
 		} 
 		catch (SQLException ex) {
 			out.println(ex);
 		}
 		finally
 		{
-			closeConnection();
+			try{
+				closeConnection();
+			}
+				catch(SQLException ex){
+			}
 		}	
 		
 		if(retStr != null)
