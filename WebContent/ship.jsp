@@ -43,11 +43,13 @@
 	}
 	//Start a transaction (turn-off auto-commit)
 	con.setAutoCommit(false);
+
 	//Retrieve all items in order with given id
 	String sql2 = "SELECT productId, quantity FROM orderproduct WHERE orderId = ?";
 	PreparedStatement stmt2 = con.prepareStatement(sql2);
 	stmt2.setString(1,orderId);
 	ResultSet rst2 = stmt2.executeQuery();
+
 	//Create a new shipment record.
 	Date d = new Date();
 	java.sql.Date sqlDate = new java.sql.Date(d.getTime());
@@ -56,6 +58,7 @@
 	pstmt3.setDate(1,sqlDate);
 	pstmt3.setInt(2,1);	
 	pstmt3.executeUpdate();
+
 	// TODO: For each item verify sufficient quantity available in warehouse 1.
 	String outstr = "";
 	while(rst2.next()){
@@ -68,6 +71,7 @@
 		quantityStmt.setInt(1,productId);
 		quantityStmt.setInt(2,1);
 		ResultSet quantityRst = quantityStmt.executeQuery();
+		
 		//If any item does not have sufficient inventory, cancel transaction and rollback. Otherwise, update inventory for each item.
 		if(quantityRst.next()){
 			quantityInStock = quantityRst.getInt("quantity");

@@ -9,6 +9,7 @@
 <%@ include file="jdbc.jsp" %>
 
 <%
+// TODO: Write SQL query that prints out total order amount by day
 try{
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
     String sql = "SELECT orderDate, SUM(totalAmount) AS 'Daily Total' FROM ordersummary GROUP BY orderDate ORDER BY orderDate ASC";
