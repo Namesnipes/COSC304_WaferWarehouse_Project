@@ -32,6 +32,7 @@ con.setCatalog("orders");
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
     String productName = rst.getString(2);
     String productPrice = rst.getString(3);
+    String productDesc = rst.getString("productDesc");
     String productImgBinary = rst.getString("productImage");
     String productImg = rst.getString("productImageURL");
     if(productImg == null) productImg = "";
@@ -60,18 +61,11 @@ con.setCatalog("orders");
         out.println("<img src=./imgs/" + productImg + " width=100; height=100>");
     }
     out.println("<div style=\"position: relative;left: 10px;\"><b>Id: </b>" + rst.getString(1) + "</div>");
+    out.println("<div style=\"position: relative;left: 10px;\"><b>Description: </b>" + productDesc + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Price: </b>" + currFormat.format(pr) + "</div>");
     out.println("<a href=" + url + ">Add to Cart</a>");
     out.println("<a href=\"listprod.jsp\">Continue Shopping</a>");
     out.println("</div>");
-    // TODO: If there is a productImageURL, display using IMG tag
-
-
-
-		
-// TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
-		
-// TODO: Add links to Add to Cart and Continue Shopping
 %>
 
 </body>
