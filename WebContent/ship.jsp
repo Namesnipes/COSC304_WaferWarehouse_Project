@@ -10,7 +10,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./style.css">
-<title>Wacky Grocery Shipment Processing</title>
+<title>Wacky Warehouse Shipment Processing</title>
 </head>
 <body>
         
