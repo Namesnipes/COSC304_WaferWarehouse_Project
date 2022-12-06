@@ -2,7 +2,7 @@
 <div class="header">
 	<div class="buttonContainer">
 		<a href = "index.jsp" class="b1"> Home </a>
-		<a href = "listprod.jsp" class="b1"> Products </a>
+		<a href = "listprod.jsp?productName=&categoryName=All" class="b1"> Products </a>
 		<a href = "listorder.jsp" class="b1"> Order List </a>
 		<a href = "showcart.jsp" class="b1"> Shopping Cart </a>
 		<%

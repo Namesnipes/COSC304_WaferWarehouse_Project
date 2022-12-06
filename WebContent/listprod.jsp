@@ -60,10 +60,13 @@ NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 //return all products from the db that match what the user searched
 int cid = getCategoryIdFromName(cname,out);
 
-String sql = "SELECT * FROM product WHERE productName LIKE ?";
+String sql = "SELECT product.productId,productName,productPrice,productImageURL,categoryId,SUM(quantity) as q FROM "
+			+"product FULL JOIN orderproduct ON product.productId = orderproduct.productId "
+			+"WHERE productName LIKE ? ";
 if(cid != -1){
-	sql += " AND categoryId = ?";
+	sql += "AND categoryId = ? ";
 }
+sql += "GROUP BY product.productId,productName,productPrice,productImageURL,categoryId ORDER BY q DESC";
 PreparedStatement stmt = con.prepareStatement(sql);
 stmt.setString(1,"%" + name + "%");
 if(cid != -1){
@@ -75,12 +78,14 @@ out.print("<table border=\"3\" width=\"300\" cellspacing=\"10\" cellpadding=\"10
 out.print("<thead><tr><th class=\"noBorder tableHeader\"><h3>Category</h3></th><th class=\"noBorder tableHeader\"><h3>Pic</h3></th><th class=\"noBorder tableHeader\"><h3>Product</h3></th><th class=\"noBorder tableHeader\"><h3>Price</h3></th><th class=\"noBorder\"></th></thead></tr>");
 
 //display those bad boys (products)
+Boolean firstProduct = true;
 while(rst.next()){
 	String productId = rst.getString("productId");
 	String productName = rst.getString("productName");
 	String productPrice = rst.getString("productPrice");
 	String productImg = rst.getString("productImageURL");
 	int categoryId = rst.getInt("categoryId");
+	int buys = rst.getInt("q");
 	String categoryName = getCategoryNameFromId(categoryId);
 	if(productImg == null) productImg = "";
 
@@ -100,7 +105,12 @@ while(rst.next()){
 		out.print("<img src=./imgs/" + productImg + " width=\"100;\" height=\"100\">");
 	}
 	out.print("</td>");
-	out.print("<td><a href='"+productPage+"'>"+productName+"</a></td>");
+	out.print("<td><a href='"+productPage+"'>"+productName+"</a>\n" + buys + " bought ");
+	if(firstProduct && cname.equals("All") && name.length() == 0){
+		out.print("<b>(most popular!)</b>");
+		firstProduct = false;
+	}
+	out.print("</td>");
 	out.print("<td>"+currFormat.format(rst.getDouble("productPrice"))+"</td>");
 	out.print("<td><a href='"+url+"'>Add to cart</a></td>");
 	out.print("</tr>");
