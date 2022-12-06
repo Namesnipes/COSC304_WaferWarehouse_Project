@@ -7,6 +7,10 @@ body {
 h1{
 	color:#ffa939;
 }
+h3{
+	color:#ffa939;
+	font-size: 30px;
+}
 .header{
 	height: 50px;
 	background-color:#510101;

@@ -26,7 +26,7 @@ if(session.getAttribute("authenticatedUser") != null) {
         out.print("<h2 align=\"center\"><a href=\"logout.jsp\">Log out</a></h2>");
 
         String userName = (String) session.getAttribute("authenticatedUser");
-        out.print("<h1 align='center'>Hello "+userName+"!</h1>");
+        out.print("<h1 align='center'>Hey "+userName+"!</h1>");
 }
 %>
 
