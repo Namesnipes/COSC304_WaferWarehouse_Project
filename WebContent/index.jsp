@@ -13,7 +13,7 @@ if(session.getAttribute("authenticatedUser") == null){
 }
 %>
 
-<h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
+<h2 align="center"><a href="listprod.jsp?productName=&categoryName=All">Begin Shopping</a></h2>
 
 <h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
 

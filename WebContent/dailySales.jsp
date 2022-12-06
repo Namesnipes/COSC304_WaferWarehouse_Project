@@ -19,14 +19,14 @@
 // TODO: Write SQL query that prints out total order amount by day
 try{
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-    String sql = "SELECT orderDate, SUM(totalAmount) AS 'Daily Total' FROM ordersummary GROUP BY orderDate ORDER BY orderDate ASC";
+    String sql = "SELECT DAY(orderDate) as Day,MONTH(orderDate) as Month,YEAR(orderDate)as Year, SUM(totalAmount) AS 'Daily Total' FROM ordersummary GROUP BY DAY(orderDate),MONTH(orderDate),YEAR(orderDate) ORDER BY DAY(orderDate),MONTH(orderDate),YEAR(orderDate) ASC";
     getConnection();
     con.setCatalog("orders");
     PreparedStatement stmt = con.prepareStatement(sql);
     ResultSet rst = stmt.executeQuery();
     out.println("<div><table border='1' width='300' cellspacing='10' cellpadding='5'><tr style='background-color:rgb(18, 112, 84);color:rgb(66, 28, 14)'><th>Order Date</th><th>Total Order Amount</th></tr>");
     while(rst.next()){
-        String dateStr = rst.getString("orderDate").split(" ")[0];
+        String dateStr = rst.getString("Year") + "-" + rst.getString("Month") + "-" + rst.getString("Day");
         String amount = currFormat.format(rst.getDouble("Daily Total"));
 
         out.print("<tr><td>"+dateStr+"</td><td>"+amount+"</td></tr>"); 
