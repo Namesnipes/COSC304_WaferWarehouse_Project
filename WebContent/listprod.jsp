@@ -1,4 +1,5 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
+<%@ page import="java.io.IOException" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
@@ -23,10 +24,24 @@
 <form method="get" action="listprod.jsp">
 <input type="text" name="productName" size="50">
 <input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
+<br>
+<label for="categoryName">Filter by:</label>
+  <select name="categoryName" id="categoryName">
+    <option value="All">All</option>
+	<option value="Beverages">Beverages</option>
+	<option value="Condiments">Condiments</option>
+	<option value="Dairy Products">Dairy Products</option>
+	<option value="Produce">Produce</option>
+	<option value="Meat/Poultry">Meat/Poultry</option>
+	<option value="Produce">Produce</option>
+	<option value="Confections">Confections</option>
+	<option value="Grains/Cereals">Grains/Cereals</option>
+  </select>
 </form>
 <pre>
 <% // Get product name to search for
 String name = request.getParameter("productName");
+String cname = request.getParameter("categoryName");
 		
 //Note: Forces loading of SQL Server driver
 try
@@ -51,13 +66,21 @@ con.setCatalog("orders");
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 //return all products from the db that match what the user searched
+int cid = getCategoryIdFromName(cname,out);
+
 String sql = "SELECT * FROM product WHERE productName LIKE ?";
+if(cid != -1){
+	sql += " AND categoryId = ?";
+}
 PreparedStatement stmt = con.prepareStatement(sql);
 stmt.setString(1,"%" + name + "%");
+if(cid != -1){
+	stmt.setInt(2,cid);
+}
 ResultSet rst = stmt.executeQuery();
 out.print("<table border=\"3\" width=\"300\" cellspacing=\"10\" cellpadding=\"10\">");
 
-out.print("<thead><tr><th></th><th>Product Name</th><th>Price</th></thead></tr>");
+out.print("<thead><tr><th></th><th>Product Name</th><th>Price</th><th>Category</th></thead></tr>");
 
 //display those bad boys (products)
 while(rst.next()){
@@ -65,6 +88,8 @@ while(rst.next()){
 	String productName = rst.getString("productName");
 	String productPrice = rst.getString("productPrice");
 	String productImg = rst.getString("productImageURL");
+	int categoryId = rst.getInt("categoryId");
+	String categoryName = getCategoryNameFromId(categoryId);
 	if(productImg == null) productImg = "";
 
 	//using urlencoder is overkill apparently you could just surround the productname in double quotes ("") but its too late now
@@ -75,14 +100,52 @@ while(rst.next()){
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
 
 	String productPage = "product.jsp?id=" + URLEncoder.encode(productId, StandardCharsets.UTF_8);
-	out.print("<tr><td><a href='"+url+"'>Add to cart</a></td>");
-	out.print("<td><a href='"+productPage+"'>"+productName+"</a></td>"
-		+	"</td><td>"+currFormat.format(rst.getDouble("productPrice"))+"</td></tr>");
+	out.print("<tr>");
+	out.print("<td><a href='"+url+"'>Add to cart</a></td>");
+	out.print("<td><a href='"+productPage+"'>"+productName+"</a></td>");
+	out.print("<td>"+currFormat.format(rst.getDouble("productPrice"))+"</td>");
+	out.print("<td>" + categoryName + "</td>");
+	out.print("</tr>");
 }
 out.println("</table>");
 
 closeConnection();
 
+%>
+
+<%!
+String getCategoryNameFromId(int id){
+	String n = "noname";
+	try{
+		String sql = "SELECT categoryName FROM category WHERE categoryId = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1,id);
+		ResultSet rst = stmt.executeQuery();
+		rst.next();
+		n = rst.getString("categoryName");
+	} catch(Exception e){
+
+	}
+	return n;
+}
+%>
+
+<%!
+int getCategoryIdFromName(String name,JspWriter out)  throws IOException
+{
+	int id = -1;
+	try{
+		String sql = "SELECT categoryId FROM category WHERE categoryName = ?";
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setString(1,name);
+		ResultSet rst = stmt.executeQuery();
+		rst.next();
+		id = rst.getInt("categoryId");
+	} catch(Exception e){
+		//out.print(e);
+	}
+	return id;
+}
 %>
 </pre>
 </body>
