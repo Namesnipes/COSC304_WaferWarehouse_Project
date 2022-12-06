@@ -89,3 +89,10 @@ h1{
 .tableHeader{
 	background-color: rgba(0,0,0,0.15);
 }
+
+.logInHeader{
+	float: right;
+	margin-right: 50px;
+	color: white;
+	line-height: 50px;
+}

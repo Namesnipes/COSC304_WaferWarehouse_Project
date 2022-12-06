@@ -11,14 +11,7 @@
 <title>The Wacky Wafer Warehouse</title>
 </head>
 <body>
-<h1 style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: dashed;"> The Wacky Wafer Warehouse </h1>
-<div class="header">
-	<div class="buttonContainer">
-		<a href = "listprod.jsp" class="b1"> Products </a>
-		<a href = "listorder.jsp" class="b1"> Order List </a>
-		<a href = "showcart.jsp" class="b1"> Shopping Cart </a>
-	</div>
-</div>
+<%@ include file="header.jsp" %>
 <h1>Search for the products you want to buy:</h1>
 
 <form method="get" action="listprod.jsp">

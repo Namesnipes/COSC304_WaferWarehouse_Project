@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./style.css">
-        <title>The Wacky Wafer Warehouse's Main Page</title>
+        <title>The Wacky Wafer Warehouses Main Page</title>
 </head>
 <body>
 <h1 align="center" style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: dashed;">Welcome to The Wacky Wafer Warehouse!</h1>

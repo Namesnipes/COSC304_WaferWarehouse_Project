@@ -10,14 +10,7 @@
 <title>Wacky Wafer Warehouse Order List</title>
 </head>
 <body>
-<h1 style="display: block;/*! */margin: 0;line-height: 50px;border: solid;/*! border-radius: 10px; */border-style: ridge;"> The Wacky Wafer Warehouse </h1>
-<div class="header">
-	<div class="buttonContainer">
-		<a href = "listprod.jsp" class="b1"> Products </a>
-		<a href = "listorder.jsp" class="b1"> Order List </a>
-		<a href = "showcart.jsp" class="b1"> Shopping Cart </a>
-	</div>
-</div>
+<%@ include file="header.jsp" %>
 <h1>Order List</h1>
 <pre>
 <%
