@@ -58,8 +58,12 @@
 	pstmt3.setDate(1,sqlDate);
 	pstmt3.setInt(2,1);	
 	pstmt3.executeUpdate();
+<<<<<<< Updated upstream
 
 	// TODO: For each item verify sufficient quantity available in warehouse 1.
+=======
+	// For each item verify sufficient quantity available in warehouse 1.
+>>>>>>> Stashed changes
 	String outstr = "";
 	while(rst2.next()){
 		int productId = rst2.getInt("productId");
