@@ -143,44 +143,35 @@ CREATE TABLE review (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-INSERT INTO category(categoryName) VALUES ('Beverages');
-INSERT INTO category(categoryName) VALUES ('Condiments');
-INSERT INTO category(categoryName) VALUES ('Dairy Products');
-INSERT INTO category(categoryName) VALUES ('Produce');
-INSERT INTO category(categoryName) VALUES ('Meat/Poultry');
-INSERT INTO category(categoryName) VALUES ('Seafood');
-INSERT INTO category(categoryName) VALUES ('Confections');
-INSERT INTO category(categoryName) VALUES ('Grains/Cereals');
+INSERT INTO category(categoryName) VALUES ('Wafers');
+INSERT INTO category(categoryName) VALUES ('Donuts');
+INSERT INTO category(categoryName) VALUES ('Cakes');
+INSERT INTO category(categoryName) VALUES ('Pies');
+INSERT INTO category(categoryName) VALUES ('Muffins');
+INSERT INTO category(categoryName) VALUES ('Cookies');
+INSERT INTO category(categoryName) VALUES ('Ice Cream');
 
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Chia', 1, '10 boxes x 20 bags',2.00,'1.jpg');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Chocolate Cupcake',1,'24 - 12 oz bottles',19.00,'choc_cupcake.png');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Chocolate Cake Slice',2,'12 - 550 ml bottles',10.00,'choc_cake_slice.png');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Icecream Sandwich',2,'48 - 6 oz jars',22.00,'icecream_sandwich.png');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Mud Pie',2,'36 boxes',21.35,'mud_pie.png');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Rolo Icecream',2,'12 - 8 oz jars',25.00,'rolo_icecream.png');
-INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) VALUES ('Vanilla Icecream Cone',4,'12 - 1 lb pkgs.',30.00,'vanilla_cone.png');
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Northwoods Cranberry Sauce',2,'12 - 12 oz jars',40.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Mishi Kobe Niku',5,'18 - 500 g pkgs.',97.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Ikura',6,'12 - 200 ml jars',31.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Queso Cabrales',3,'1 kg pkg.',21.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Queso Manchego La Pastora',3,'10 - 500 g pkgs.',38.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Tofu',4,'40 - 100 g pkgs.',23.25);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Genen Shouyu',2,'24 - 250 ml bottles',15.50);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Pavlova',7,'32 - 500 g boxes',17.45);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Alice Mutton',5,'20 - 1 kg tins',39.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Carnarvon Tigers',6,'16 kg pkg.',62.50);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Teatime Chocolate Biscuits',7,'10 boxes x 12 pieces',9.20);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Sir Rodney''s Marmalade',7,'30 gift boxes',81.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Sir Rodney''s Scones',7,'24 pkgs. x 4 pieces',10.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Gustaf''s Knackebread',8,'24 - 500 g pkgs.',21.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Sasquatch Ale',1,'24 - 12 oz bottles',14.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Steeleye Stout',1,'24 - 12 oz bottles',18.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Inlagd Sill',6,'24 - 250 g  jars',19.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Boston Crab Meat',6,'24 - 4 oz tins',18.40);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Jack''s New England Clam Chowder',6,'12 - 12 oz cans',9.65);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Singaporean Hokkien Fried Mee',8,'32 - 1 kg pkgs.',14.00);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Louisiana Fiery Hot Pepper Sauce',2,'32 - 8 oz bottles',21.05);
-INSERT product(productName, categoryId, productDesc, productPrice) VALUES ('Laughing Lumberjack Lager',1,'24 - 12 oz bottles',14.00);
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
+    VALUES ('Stroop-Wafer',1,'A stroop-wafer is a thin, round wafer made from two layers of sweet baked dough held together by caramel filling.',4.99,'stroopwafer.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
+    VALUES ('Strawberry Donut',2,'A simple strawberry donut.',0.99,'donut.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
+    VALUES ('Chocolate Maple Cupcake',3,'A rich chocolate cupcake topped with a whipped maple icing. Guaranteed to make your teeth fall out!',6.99,'choc_cupcake.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
+    VALUES ('Brownie Chocolate Cake Slice',3,'Deliciously chocolatey, with a bit of a crunch from the brownie base!',12.99,'choc_cake_slice.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL)
+    VALUES ('Mud Pie',4,'Our take on a classic soft and sweet mud-pie!',19.80,'mud_pie.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL)
+    VALUES ('Large Chocolate Chip Muffin',5,'This is just a really large muffin with chocolate chips.',22.99,'large_muffin.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL)
+    VALUES ('Choco-Cookie',6,'This is my grandmas recipe and she makes the best cookies.',4000.00,'cookie.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL)
+    VALUES ('Wafer-wich',7,'Your classic ice cream sandwich, with a twist! Our made-in-house chocolate wafers squeeze together vanilla ice cream to create the Wafer-wich',22.00,'icecream_sandwich.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
+    VALUES ('Rolo Icecream',7,'This stuff is so good you will not be able to share it!',25.00,'rolo_icecream.png');
+INSERT product(productName, categoryId, productDesc, productPrice, productImageURL)
+    VALUES ('Vanilla Icecream Cone',7,'Made from the dairy of Okanagan cows, this cone is made to reflect the current price of goods in the Okanagan.',30.00,'vanilla_cone.png');
+
 
 INSERT INTO warehouse(warehouseName) VALUES ('Main warehouse');
 INSERT INTO productInventory(productId, warehouseId, quantity, price) VALUES (1, 1, 5, 18);

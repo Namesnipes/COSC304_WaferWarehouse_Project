@@ -21,14 +21,13 @@
 <label for="categoryName">Filter by:</label>
   <select name="categoryName" id="categoryName">
     <option value="All">All</option>
-	<option value="Beverages">Beverages</option>
-	<option value="Condiments">Condiments</option>
-	<option value="Dairy Products">Dairy Products</option>
-	<option value="Produce">Produce</option>
-	<option value="Meat/Poultry">Meat/Poultry</option>
-	<option value="Produce">Produce</option>
-	<option value="Confections">Confections</option>
-	<option value="Grains/Cereals">Grains/Cereals</option>
+	<option value="Wafers">Wafers</option>
+	<option value="Donuts">Donuts</option>
+	<option value="Cakes">Cakes</option>
+	<option value="Pies">Pies</option>
+	<option value="Muffins">Muffins</option>
+	<option value="Cookies">Cookies</option>
+	<option value="Ice Cream">Ice Creams</option>
   </select>
 </form>
 <pre>
