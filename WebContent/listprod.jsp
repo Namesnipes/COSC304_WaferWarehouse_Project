@@ -80,7 +80,7 @@ if(cid != -1){
 ResultSet rst = stmt.executeQuery();
 out.print("<table border=\"3\" width=\"300\" cellspacing=\"10\" cellpadding=\"10\">");
 
-out.print("<thead><tr><th></th><th>Product Name</th><th>Price</th><th>Category</th></thead></tr>");
+out.print("<thead><tr><th class=\"noBorder tableHeader\"><h3>Category</h3></th><th class=\"noBorder tableHeader\"><h3>Pic</h3></th><th class=\"noBorder tableHeader\"><h3>Product</h3></th><th class=\"noBorder tableHeader\"><h3>Price</h3></th><th class=\"noBorder\"></th></thead></tr>");
 
 //display those bad boys (products)
 while(rst.next()){
@@ -101,10 +101,16 @@ while(rst.next()){
 
 	String productPage = "product.jsp?id=" + URLEncoder.encode(productId, StandardCharsets.UTF_8);
 	out.print("<tr>");
-	out.print("<td><a href='"+url+"'>Add to cart</a></td>");
+	out.print("<td>" + categoryName + "</td>");
+
+	out.print("<td>");
+	if(productImg != null && productImg.length() > 0){
+		out.print("<img src=./imgs/" + productImg + " width=\"100;\" height=\"100\">");
+	}
+	out.print("</td>");
 	out.print("<td><a href='"+productPage+"'>"+productName+"</a></td>");
 	out.print("<td>"+currFormat.format(rst.getDouble("productPrice"))+"</td>");
-	out.print("<td>" + categoryName + "</td>");
+	out.print("<td><a href='"+url+"'>Add to cart</a></td>");
 	out.print("</tr>");
 }
 out.println("</table>");
