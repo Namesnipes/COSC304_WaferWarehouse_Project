@@ -5,6 +5,7 @@
 <title>Wacky Wafer Warehouse Grocery CheckOut Line</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 
 <h1>Enter your customer id to complete the transaction:</h1>
 
