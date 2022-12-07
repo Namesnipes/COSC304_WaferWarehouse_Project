@@ -107,7 +107,7 @@ while(rst.next()){
 	out.print("</td>");
 	out.print("<td><a href='"+productPage+"'>"+productName+"</a>\n" + buys + " bought ");
 	if(firstProduct && cname.equals("All") && name.length() == 0){
-		out.print("<b>(most popular!)</b>");
+		out.print("<span style=\"color:#EB0000\">(</span><span style=\"color:#EB6C00\">m</span><span style=\"color:#EBD900\">o</span><span style=\"color:#90EB00\">s</span><span style=\"color:#24EB00\">t</span> <span style=\"color:#00EB48\">p</span><span style=\"color:#00EBB4\">o</span><span style=\"color:#00B4EB\">p</span><span style=\"color:#0048EB\">u</span><span style=\"color:#2400EB\">l</span><span style=\"color:#9000EB\">a</span><span style=\"color:#EB00D9\">r</span><span style=\"color:#EB006C\">)</span>");
 		firstProduct = false;
 	}
 	out.print("</td>");
