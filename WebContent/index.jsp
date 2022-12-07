@@ -17,8 +17,6 @@ if(session.getAttribute("authenticatedUser") == null){
 
 <h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
 
-<h2 align="center"><a href="customer.jsp">Customer Info</a></h2>
-
 <h2 align="center"><a href="admin.jsp">Administrators</a></h2>
 
 <%
