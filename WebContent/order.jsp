@@ -23,6 +23,10 @@
 <pre>
 <% 
 String custId = request.getParameter("customerId");
+if(session.getAttribute("authenticatedUser") == null){
+	response.sendRedirect("checkout.jsp?msg=You must login to checkout.");
+	return;
+}
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
 
@@ -30,7 +34,7 @@ getConnection();
 con.setCatalog("orders");
 
 //get customer id entered from database
-String sql = "SELECT COUNT(*) as numCustomer, firstName, lastName FROM customer WHERE customerId = ? GROUP BY firstName,lastName";
+String sql = "SELECT COUNT(*) as numCustomer, firstName, lastName, userid FROM customer WHERE customerId = ? GROUP BY firstName,lastName, userid";
 PreparedStatement stmt = con.prepareStatement(sql);
 stmt.setString(1,custId);
 ResultSet rst = stmt.executeQuery();
@@ -38,18 +42,23 @@ ResultSet rst = stmt.executeQuery();
 // Determine if valid customer id was entered
 Boolean valid = false;
 try{
-	rst.next();
-
 	int numResults = rst.getInt(1);
 	if(numResults == 1){
-		out.println("<h1>Wacky ID accepted!</h1>");
 		valid = true;
 	} else {
-		out.println("<header>Wacky entry! However, you've entered an invalid ID.</header>");
+		response.sendRedirect("checkout.jsp?msg=Wacky entry! However, you've entered an invalid ID.");
+		return;
+	}
+
+	String userid = rst.getString("userid").toString();
+	if(userid.equals(session.getAttribute("authenticatedUser").toString())){
+		out.println("<h1>Wacky ID accepted!</h1>");
+	} else {
+		response.sendRedirect("checkout.jsp?msg=This is not your customer ID! Make sure your input was correct!");
 		return;
 	}
 } catch(Exception e){
-	out.println("The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!");
+	response.sendRedirect("checkout.jsp?msg=The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!");
 	return;
 }
 

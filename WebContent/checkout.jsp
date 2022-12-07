@@ -7,6 +7,13 @@
 <body>
 <%@ include file="header.jsp" %>
 
+<%
+String msg = request.getParameter("msg");
+if(msg != null && msg.length() > 0){
+    out.println("<h2>" + msg + "</h2>");
+}
+%>
+
 <h1>Enter your customer id to complete the transaction:</h1>
 
 <form method="get" action="order.jsp">
