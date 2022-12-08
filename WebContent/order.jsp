@@ -23,6 +23,10 @@
 <pre>
 <% 
 String custId = request.getParameter("customerId");
+String paynum = request.getParameter("paymentNumber");
+String expdate = request.getParameter("expiryDate");
+String paymeth = request.getParameter("paymentMethod");
+
 if(session.getAttribute("authenticatedUser") == null){
 	response.sendRedirect("checkout.jsp?msg=You must login to checkout.");
 	return;
@@ -59,10 +63,42 @@ try{
 		return;
 	}
 } catch(Exception e){
-	response.sendRedirect("checkout.jsp?msg=The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!"+e);
+	response.sendRedirect("checkout.jsp?msg=The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!");
 	return;
 }
+Boolean validInfo = true;
+try{
+	Integer.parseInt(paynum);
+} catch(Exception e){
+	validInfo = false;
+}
+if(!validInfo || paynum.length() < 1 || paymeth.length() < 1 || expdate.length() < 1){
+	response.sendRedirect("checkout.jsp?msg=Invalid payment information!");
+	return;
+} else {
+	String paymentSQL = "SELECT * FROM paymentmethod WHERE customerId = ?";
+	PreparedStatement stmtPayment = con.prepareStatement(paymentSQL);
+	stmtPayment.setString(1,custId);
+	ResultSet rstPayment = stmtPayment.executeQuery();
+	if(rstPayment.next()){ //update their payment info if they changed it
+		String paymentUpdateSQL = "UPDATE paymentmethod SET paymentType = ?, paymentNumber = ?, paymentExpiryDate = ? WHERE customerId = ?";
+		PreparedStatement paymentUpdateStmt = con.prepareStatement(paymentUpdateSQL);
+		paymentUpdateStmt.setString(1,paymeth);
+		paymentUpdateStmt.setString(2,paynum);
+		paymentUpdateStmt.setString(3,expdate);	
+		paymentUpdateStmt.setString(4,custId);	
+		paymentUpdateStmt.executeUpdate();
+	} else { // they got no saved payment info so save it
+		String insertPayInfoSQL = "INSERT INTO paymentmethod (paymentType,paymentNumber,paymentExpiryDate,customerId) VALUES (?, ?, ?, ?)"; //id is auto incremented dont set it explicitly
+		PreparedStatement paymentPst = con.prepareStatement(insertPayInfoSQL);
+		paymentPst.setString(1,paymeth);
+		paymentPst.setString(2,paynum);
+		paymentPst.setString(3,expdate);	
+		paymentPst.setString(4,custId);	
+		paymentPst.executeUpdate();
+	}
 
+}
 // Determine if there are products in the shopping cart
 
 if(productList.size() <= 0){
@@ -126,9 +162,10 @@ while (iterator.hasNext()) {
 <%@ include file="ship.jsp" %>
 <%
 out.println("<tr><td></td><td></td><td></td><td></td><td>"+currFormat.format(total)+"</td></tr></table>");
-out.println("Order completed. Will be shipped soon...");
-out.println("Your order number: " + newOrderId);
-out.println("Shipping to customer: " + custId + " " + rstOrder.getString(2) + " " + rstOrder.getString(3));
+out.println("<h2>Order completed. Will be shipped soon...</h2>");
+out.println("<h2>Your order number: " + newOrderId + "</h2>");
+out.println("<h2>Your shipment number: " + newShipmentId + "</h2>");
+out.println("<h2>Shipping to customer: " + custId + " " + rstOrder.getString(2) + " " + rstOrder.getString(3) + "</h2>");
 productList = new HashMap<String, ArrayList<Object>>();
 session.setAttribute("productList", productList);
 

@@ -44,10 +44,15 @@
 	Date d = new Date();
 	java.sql.Date sqlDate = new java.sql.Date(d.getTime());
 	String insertOrderSQL = "INSERT INTO shipment (shipmentDate,warehouseId) VALUES (?, ?)"; //shipment id is auto incremented dont set it explicitly
-	PreparedStatement pstmt3 = con.prepareStatement(insertOrderSQL);
+	PreparedStatement pstmt3 = con.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
 	pstmt3.setDate(1,sqlDate);
 	pstmt3.setInt(2,1);	
 	pstmt3.executeUpdate();
+
+	ResultSet shipmentKeys = pstmt3.getGeneratedKeys();
+	shipmentKeys.next();
+	int newShipmentId = shipmentKeys.getInt(1);
+
 	// For each item verify sufficient quantity available in warehouse 1.
 	String outstr = "";
 	Boolean successfulShipment = true;
@@ -68,7 +73,7 @@
 			if((quantityInStock-quantityWanted) < 0){
 				con.rollback();
 				closeConnection();
-				out.println("<h2> Shipment not completed. Insufficient inventory for quantity " + quantityWanted + " of product " + productName + " (" + quantityInStock + " in stock)\n Please edit your order</h2>");
+				out.println("<h2> Shipment not completed. Insufficient inventory for quantity " + quantityWanted + " of product " + productName + " (" + quantityInStock + " in stock)\n Please <a href=showcart.jsp> edit </a> your order</h2>");
 				successfulShipment = false;
 				return;
 			} else {
