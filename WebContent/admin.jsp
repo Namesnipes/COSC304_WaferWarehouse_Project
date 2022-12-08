@@ -14,7 +14,7 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<h3 align="center">Admin Menu</h3>
+<h1 align="center">Admin Menu</h3>
 
 <h2 align="center"><a href="dailySales.jsp" code style="text-decoration:none;">Daily Sales</a></h2>
 <h2 align="center"><a href="customerList.jsp" code style="text-decoration:none;">Customer List</a></h2>
