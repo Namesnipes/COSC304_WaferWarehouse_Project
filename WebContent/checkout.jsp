@@ -23,7 +23,15 @@ getConnection();
 con.setCatalog("orders");
 String paymentSQL = "SELECT * FROM paymentmethod JOIN customer ON paymentmethod.customerId = customer.customerId WHERE customer.userId = ?";
 PreparedStatement stmtPayment = con.prepareStatement(paymentSQL);
-stmtPayment.setString(1,session.getAttribute("authenticatedUser").toString());
+Object user = session.getAttribute("authenticatedUser");
+if(user == null){
+  user = "-1";
+  out.println("<h2> You must <a href=\"login.jsp\">login</a> to checkout </h2>");
+  return;
+} else{
+  user = user.toString();
+}
+stmtPayment.setString(1,user.toString());
 ResultSet rstPayment = stmtPayment.executeQuery();
 String pt = "";
 String pn = "";
