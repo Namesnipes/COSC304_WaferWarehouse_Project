@@ -34,23 +34,24 @@ getConnection();
 con.setCatalog("orders");
 
 //get customer id entered from database
-String sql = "SELECT COUNT(*) as numCustomer, firstName, lastName, userid FROM customer WHERE customerId = ? GROUP BY firstName,lastName, userid";
-PreparedStatement stmt = con.prepareStatement(sql);
-stmt.setString(1,custId);
-ResultSet rst = stmt.executeQuery();
+String sqlOrder = "SELECT COUNT(*) as numCustomer, firstName, lastName, userid FROM customer WHERE customerId = ? GROUP BY firstName,lastName, userid";
+PreparedStatement stmtOrder = con.prepareStatement(sqlOrder);
+stmtOrder.setString(1,custId);
+ResultSet rstOrder = stmtOrder.executeQuery();
 
 // Determine if valid customer id was entered
-Boolean valid = false;
+Boolean validOrder = false;
 try{
-	int numResults = rst.getInt(1);
+	rstOrder.next();
+	int numResults = rstOrder.getInt(1);
 	if(numResults == 1){
-		valid = true;
+		validOrder = true;
 	} else {
 		response.sendRedirect("checkout.jsp?msg=Wacky entry! However, you've entered an invalid ID.");
 		return;
 	}
 
-	String userid = rst.getString("userid").toString();
+	String userid = rstOrder.getString("userid").toString();
 	if(userid.equals(session.getAttribute("authenticatedUser").toString())){
 		out.println("<h1>Wacky ID accepted!</h1>");
 	} else {
@@ -58,7 +59,7 @@ try{
 		return;
 	}
 } catch(Exception e){
-	response.sendRedirect("checkout.jsp?msg=The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!");
+	response.sendRedirect("checkout.jsp?msg=The ID you entered isn't wacky enough! Please enter another wacky (and valid) ID!"+e);
 	return;
 }
 
@@ -68,7 +69,6 @@ if(productList.size() <= 0){
 	out.println("Your shopping cart is empty");
 	return;
 }
-
 //calculate price total
 double total = 0;
 for (ArrayList value : productList.values()) {
@@ -81,11 +81,11 @@ for (ArrayList value : productList.values()) {
 }
 
 //insert order into ordersummary with orderDate,totalAmount and customerId values
-Date d = new Date();
-java.sql.Date sqlDate = new java.sql.Date(d.getTime());
-String insertOrderSQL = "INSERT INTO ordersummary (orderDate,totalAmount,customerId) VALUES (?, ?, ?)";
-PreparedStatement pstmt2 = con.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
-pstmt2.setDate(1,sqlDate);
+Date dOrder = new Date();
+java.sql.Date sqlDateOrder = new java.sql.Date(dOrder.getTime());
+String insertOrderSumSQL = "INSERT INTO ordersummary (orderDate,totalAmount,customerId) VALUES (?, ?, ?)";
+PreparedStatement pstmt2 = con.prepareStatement(insertOrderSumSQL, Statement.RETURN_GENERATED_KEYS);
+pstmt2.setDate(1,sqlDateOrder);
 pstmt2.setDouble(2,total);
 pstmt2.setString(3,custId);	
 pstmt2.executeUpdate();
@@ -93,8 +93,8 @@ pstmt2.executeUpdate();
 //an orderid was generated for the last insert statement, we get it here
 ResultSet keys = pstmt2.getGeneratedKeys();
 keys.next();
-int orderId = keys.getInt(1);
-
+int newOrderId = keys.getInt(1);
+session.setAttribute("currentOrderId",newOrderId);
 //insert each product seperately into orderproduct table
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 out.print("<table border='3' width='500' cellspacing='2'>"
@@ -111,29 +111,24 @@ while (iterator.hasNext()) {
 	String productId = (String) product.get(0);
 	String productName = (String) product.get(1);
     String price = (String) product.get(2);
-	try{
 		double pr = Double.parseDouble(price);
 		int qty = ( (Integer)product.get(3)).intValue();
 		out.print("<tr><td>"+productId+"</td><td>"+productName+"</td><td>"+qty+"</td><td>"+currFormat.format(pr)+"</td></tr>");
 		insertProductSQL += "INSERT INTO orderproduct (orderId,productId,quantity,price) VALUES (?,?,?,?)";
-		PreparedStatement pstmt3 = con.prepareStatement(insertProductSQL);
-		pstmt3.setInt(1,orderId);
-		pstmt3.setString(2,productId);
-		pstmt3.setInt(3,qty);
-		pstmt3.setDouble(4,pr);
-		pstmt3.executeUpdate();
-	} catch (Exception e){
-		out.println("Broken cart... reseting cart");
-		productList = new HashMap<String, ArrayList<Object>>();
-		session.setAttribute("productList", productList);
-		return;
+		PreparedStatement orderPstmt3 = con.prepareStatement(insertProductSQL);
+		orderPstmt3.setInt(1,newOrderId);
+		orderPstmt3.setString(2,productId);
+		orderPstmt3.setInt(3,qty);
+		orderPstmt3.setDouble(4,pr);
+		orderPstmt3.executeUpdate();
 }
-}
-
+%>
+<%@ include file="ship.jsp" %>
+<%
 out.println("<tr><td></td><td></td><td></td><td></td><td>"+currFormat.format(total)+"</td></tr></table>");
 out.println("Order completed. Will be shipped soon...");
-out.println("Your order number: " + orderId);
-out.println("Shipping to customer: " + custId + " " + rst.getString(2) + " " + rst.getString(3));
+out.println("Your order number: " + newOrderId);
+out.println("Shipping to customer: " + custId + " " + rstOrder.getString(2) + " " + rstOrder.getString(3));
 productList = new HashMap<String, ArrayList<Object>>();
 session.setAttribute("productList", productList);
 
