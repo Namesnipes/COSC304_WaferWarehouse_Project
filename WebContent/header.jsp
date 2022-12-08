@@ -9,6 +9,7 @@
 		Object username = session.getAttribute("authenticatedUser");
 		if(username == null){
 			out.print("<a href=login.jsp class=logInHeader> Log In </a>");
+			out.print("<a href=register.jsp class=logInHeader> Register </a>");
 		} else {
 			out.print("<p class=logInHeader style=\"line-height: unset\">Logged in as: " + username + "</p>");
 		}

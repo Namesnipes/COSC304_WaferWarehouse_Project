@@ -1,0 +1,5 @@
+{
+    "java.project.sourcePaths": [
+        "WebContent\\WEB-INF\\lib"
+    ]
+}
