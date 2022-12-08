@@ -5,23 +5,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
-<%@ include file="jdbc.jsp" %>
-
-<html>
-<head>
-<link rel="stylesheet" href="./style.css">
-<title>Wacky Warehouse Shipment Processing</title>
-</head>
-<body>
-        
-<%@ include file="header.jsp" %>
 
 <%
 	//Connect to database
 	getConnection();
 	con.setCatalog("orders");
 
-	String orderId = request.getParameter("orderId");
+	String orderId = session.getAttribute("currentOrderId").toString();
           
 	//Check if valid order id
 	
@@ -45,7 +35,7 @@
 	con.setAutoCommit(false);
 
 	//Retrieve all items in order with given id
-	String sql2 = "SELECT productId, quantity FROM orderproduct WHERE orderId = ?";
+	String sql2 = "SELECT productName,product.productId, quantity FROM orderproduct JOIN product ON orderproduct.productId = product.productId WHERE orderId = ?;";
 	PreparedStatement stmt2 = con.prepareStatement(sql2);
 	stmt2.setString(1,orderId);
 	ResultSet rst2 = stmt2.executeQuery();
@@ -54,14 +44,21 @@
 	Date d = new Date();
 	java.sql.Date sqlDate = new java.sql.Date(d.getTime());
 	String insertOrderSQL = "INSERT INTO shipment (shipmentDate,warehouseId) VALUES (?, ?)"; //shipment id is auto incremented dont set it explicitly
-	PreparedStatement pstmt3 = con.prepareStatement(insertOrderSQL);
+	PreparedStatement pstmt3 = con.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
 	pstmt3.setDate(1,sqlDate);
 	pstmt3.setInt(2,1);	
 	pstmt3.executeUpdate();
+
+	ResultSet shipmentKeys = pstmt3.getGeneratedKeys();
+	shipmentKeys.next();
+	int newShipmentId = shipmentKeys.getInt(1);
+
 	// For each item verify sufficient quantity available in warehouse 1.
 	String outstr = "";
+	Boolean successfulShipment = true;
 	while(rst2.next()){
 		int productId = rst2.getInt("productId");
+		String productName = rst2.getString("productName");
 		int quantityWanted = rst2.getInt("quantity");
 		int quantityInStock = 0;
 
@@ -70,14 +67,14 @@
 		quantityStmt.setInt(1,productId);
 		quantityStmt.setInt(2,1);
 		ResultSet quantityRst = quantityStmt.executeQuery();
-		
 		//If any item does not have sufficient inventory, cancel transaction and rollback. Otherwise, update inventory for each item.
 		if(quantityRst.next()){
 			quantityInStock = quantityRst.getInt("quantity");
 			if((quantityInStock-quantityWanted) < 0){
 				con.rollback();
 				closeConnection();
-				out.println("<h2> Shipment not completed. Insufficient inventory for quantity " + quantityWanted + " of product id " + productId + " (" + quantityInStock + " in stock)</h2>");
+				out.println("<h2> Shipment not completed. Insufficient inventory for quantity " + quantityWanted + " of product " + productName + " (" + quantityInStock + " in stock)\n Please <a href=showcart.jsp> edit </a> your order</h2>");
+				successfulShipment = false;
 				return;
 			} else {
 				String quantityUpdate = "UPDATE productInventory SET quantity = ? WHERE productId = ? AND warehouseId = ?";
@@ -90,14 +87,12 @@
 			}
 		}
 	}
-	out.println(outstr);
+	out.println(outstr);	
 	// Auto-commit should be turned back on
 	con.commit();
 	con.setAutoCommit(true);
-	closeConnection();
+	//closeConnection();
 %>                       				
-
-<h2><a href="shop.html">Back to Main Page</a></h2>
 
 </body>
 </html>
