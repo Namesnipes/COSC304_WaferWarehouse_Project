@@ -96,7 +96,7 @@ while(rst.next()){
 					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
 
-	String updateProdUrl = "updateProductPage.jsp?id=" + productId;
+	String updateProdUrl = "updateProductPage.jsp?productId=" + productId;
 
 	String reviewProdUrl ="reviewProd.jsp?id=" + productId;
 
