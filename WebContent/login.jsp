@@ -33,6 +33,7 @@ if (session.getAttribute("loginMessage") != null)
 <input class="submit" type="submit" name="Submit2" value="Log In">
 </form>
 
+<h3><a href="forgotPassword.jsp"> I forgot my password!! </a></h3>
 </div>
 
 </body>
