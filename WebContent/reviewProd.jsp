@@ -28,7 +28,7 @@ out.print("<form method=\"get\" action=\"addReview.jsp\" size=\"200\">" +
     "<br>" +
     "</form>");
 
-    %>
+%>
 
 </div>
 </body>
