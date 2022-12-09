@@ -109,48 +109,47 @@ else
 	//for AJAX
 	out.print("<script>");
 	/*
-	 * function run(operation,id,quantityElement,price,priceElement) {
-            
-        // Creating Our XMLHttpRequest object 
-        var xhr = new XMLHttpRequest();
-            
-        // Making our connection  
-                var url = "";
-                var add = 0;
-                if(operation === "add"){
-            url = 'http://localhost/shop/addcart.jsp?id=' + id + '&name=add';
-                    add = 1
-        }
-                if(operation === "minus"){
-                    url = 'http://localhost/shop/addcart.jsp?minus=' + id;
-                    add = -1
-                }
-        xhr.open("GET", url, true);
-  
-        // function execute after request is successful 
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var newNum = parseInt(quantityElement.innerText) + add
-                if(operation === "minus" && newNum === 0){
-                  newNum = 1;
-                } else {
-					var total = parseFloat(document.getElementsByClassName("total")[0].innerText.split(" $")[1])
-					console.log(total)
-					console.log(add * price,add,price)
-					var total = total + (add * price)
-					document.getElementsByClassName("total")[0].innerText = "Total: " + "$" + Math.round(total * 100)/100
-				}
-                                var priceElement = quantityElement.parentElement.parentElement.getElementsByClassName("subtotalInfo")[0]
-                quantityElement.innerText = newNum
-								console.log(newNum*price)
-                                priceElement.innerText = "x" + newNum + " = " + "$" + (Math.round(newNum*price * 100) / 100)
+	 * function run(operation, id, quantityElement, price, priceElement) {
 
-            }
-        }
-xhr.send()
+    // Creating Our XMLHttpRequest object 
+    var xhr = new XMLHttpRequest();
+
+    // Making our connection  
+    var url = "";
+    var add = 0;
+    if (operation === "add") {
+        url = 'http://localhost/shop/addcart.jsp?id=' + id + '&name=add';
+        add = 1
+    }
+    if (operation === "minus") {
+        url = 'http://localhost/shop/addcart.jsp?minus=' + id;
+        add = -1
+    }
+    xhr.open("GET", url, true);
+
+    // function execute after request is successful 
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var newNum = parseInt(quantityElement.innerText) + add
+            if (operation === "minus" && newNum === 0) {
+                newNum = 1;
+            } else {
+                var total = parseFloat(document.getElementsByClassName("total")[0].innerText.replace(/[^\d.-]/g, ''))
+                total = total + (add * price)
+                console.log(Math.round(total * 100) / 100)
+                document.getElementsByClassName("total")[0].innerText = "Total: " + "$" + Math.round(total * 100) / 100
+            }
+            var priceElement = quantityElement.parentElement.parentElement.getElementsByClassName("subtotalInfo")[0]
+            quantityElement.innerText = newNum
+            console.log(newNum * price)
+            priceElement.innerText = "x" + newNum + " = " + "$" + (Math.round(newNum * price * 100) / 100)
+
+        }
+    }
+    xhr.send()
 }
 	 */
-	out.print("function run(t,e,n,a,s){var l=new XMLHttpRequest,o=\"\",r=0;\"add\"===t&&(o=\"http://localhost/shop/addcart.jsp?id=\"+e+\"&name=add\",r=1),\"minus\"===t&&(o=\"http://localhost/shop/addcart.jsp?minus=\"+e,r=-1),l.open(\"GET\",o,!0),l.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var e=parseInt(n.innerText)+r;if(\"minus\"===t&&0===e)e=1;else{var s=parseFloat(document.getElementsByClassName(\"total\")[0].innerText.split(\" $\")[1]);console.log(s),console.log(r*a,r,a);var s=s+r*a;document.getElementsByClassName(\"total\")[0].innerText=\"Total: $\"+Math.round(100*s)/100}var l=n.parentElement.parentElement.getElementsByClassName(\"subtotalInfo\")[0];n.innerText=e,console.log(e*a),l.innerText=\"x\"+e+\" = $\"+Math.round(e*a*100)/100}},l.send()}");
+	out.print("function run(e,t,n,a,s){var l=new XMLHttpRequest,o=\"\",r=0;\"add\"===e&&(o=\"http://localhost/shop/addcart.jsp?id=\"+t+\"&name=add\",r=1),\"minus\"===e&&(o=\"http://localhost/shop/addcart.jsp?minus=\"+t,r=-1),l.open(\"GET\",o,!0),l.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var t=parseInt(n.innerText)+r;if(\"minus\"===e&&0===t)t=1;else{var s=parseFloat(document.getElementsByClassName(\"total\")[0].innerText.replace(/[^\\d.-]/g,\"\"));s+=r*a,console.log(Math.round(100*s)/100),document.getElementsByClassName(\"total\")[0].innerText=\"Total: $\"+Math.round(100*s)/100}var l=n.parentElement.parentElement.getElementsByClassName(\"subtotalInfo\")[0];n.innerText=t,console.log(t*a),l.innerText=\"x\"+t+\" = $\"+Math.round(t*a*100)/100}},l.send()}");
 	out.print("</script>");
 	out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
 	out.println("<h2><a href=\"listprod.jsp\">Continue Shopping</a></h2>");

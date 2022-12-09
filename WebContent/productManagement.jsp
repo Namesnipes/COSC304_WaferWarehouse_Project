@@ -19,7 +19,7 @@
 <h1 align="center">Product Management</h2>
 
 <h3 align="center"><a href="addProduct.jsp" code style="text-decoration:none;">Add Product</a></h3>
-<h3 align="center"><a href="listprod.jsp" code style="text-decoration:none;">Update Product</a></h3>
+<h3 align="center"><a href="updateProductPage.jsp" code style="text-decoration:none;">Update Product</a></h3>
 <h3 align="center"><a href="deleteProduct.jsp" code style="text-decoration:none;">Delete Product</a></h3>
 <br>
 <h3 align="center"><a href="addWarehouse.jsp" code style="text-decoration:none;">Add Warehouse</a></h3>
