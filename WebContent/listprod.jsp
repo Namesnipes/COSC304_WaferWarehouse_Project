@@ -82,7 +82,7 @@ Boolean firstProduct = true;
 while(rst.next()){
 	String productId = rst.getString("productId");
 	String productName = rst.getString("productName");
-	String productPrice = rst.getString("productPrice");
+	Double productPrice = rst.getDouble("productPrice");
 	String productImg = rst.getString("productImageURL");
 	int categoryId = rst.getInt("categoryId");
 	int buys = rst.getInt("q");
@@ -97,7 +97,7 @@ while(rst.next()){
 	String url = "addcart.jsp?id=" + 
 					URLEncoder.encode(productId, StandardCharsets.UTF_8) + "&name=" +
 					URLEncoder.encode(productName, StandardCharsets.UTF_8) + "&price=" +
-					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
+					URLEncoder.encode(productPrice.toString(), StandardCharsets.UTF_8) + "&img="+
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
 
 	String updateProdUrl = "updateProductPage.jsp?productId=" + productId;
