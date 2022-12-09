@@ -18,8 +18,6 @@
 
 getConnection();
 con.setCatalog("orders");
-
-
     
     String productId = request.getParameter("id");
         
@@ -30,9 +28,10 @@ con.setCatalog("orders");
     rst.next();
 
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-    String productName = rst.getString(2);
-    String productPrice = rst.getString(3);
+    String productName = rst.getString("productName");
+    String productPrice = rst.getString("productPrice");
     String productDesc = rst.getString("productDesc");
+    String productReview = rst.getString("productReview");
     String productImgBinary = rst.getString("productImage");
     String productImg = rst.getString("productImageURL");
     if(productImg == null) productImg = "";
@@ -60,6 +59,8 @@ con.setCatalog("orders");
     if(productImg != ""){
         out.println("<img src=./imgs/" + productImg + " width=100; height=100>");
     }
+    if(productReview != null)
+        out.println("<div style=\"position: relative;left: 500px;\"><b>Review: </b>" + rst.getString("productReview") + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Id: </b>" + rst.getString(1) + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Description: </b>" + productDesc + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Price: </b>" + currFormat.format(pr) + "</div>");
