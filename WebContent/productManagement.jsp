@@ -22,7 +22,7 @@
 <h3 align="center"><a href="updateProductPage.jsp" code style="text-decoration:none;">Update/Delete Product</a></h3>
 <br>
 <h3 align="center"><a href="addWarehouse.jsp" code style="text-decoration:none;">Add Warehouse</a></h3>
-<h3 align="center"><a href="updateWarehouse.jsp" code style="text-decoration:none;">Update Warehouse</a></h3>
+<h3 align="center"><a href="updateWarehouse.jsp" code style="text-decoration:none;">Update/Delete Warehouse</a></h3>
 <br>
 <h3 align="center"><a href="updateCustomer.jsp" code style="text-decoration:none;">Update Customer</a></h3>
 <br>

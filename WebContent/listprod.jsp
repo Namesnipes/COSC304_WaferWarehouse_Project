@@ -89,7 +89,7 @@ while(rst.next()){
 	String categoryName = getCategoryNameFromId(categoryId);
 	if(productImg == null) productImg = "";
 
-	if(productName == "9999" && categoryId == 9999 && productPrice == 9999){
+	if(productName.equals("9999") && productPrice == 9999){
 		continue;
 	}		
 

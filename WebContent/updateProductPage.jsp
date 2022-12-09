@@ -17,7 +17,7 @@
 
 <%@ include file="header.jsp" %>
 
-<% 
+<% //autofill
 out.print("<h3>Enter values into any submission box, then click 'Submit' to make changes</h3>");
 String id = request.getParameter("productId");
 String productName = "Product does not exist";
@@ -47,7 +47,7 @@ if(id != null){
 
 <form name="autofill" method=get action=updateProductPage.jsp>
     <tr>
-        <p> <h2>Submit to autofill boxes below with existing information:</h2><br>(Enter "9999" into all boxes below to delete product)</p> 
+        <p> <h2>Submit to autofill boxes below with existing information:</h2></p> 
         <%
             out.print("<input type=\"number\" name=\"productId\" value=" + id + "  size=10 maxlength=25>");
         %>
@@ -55,7 +55,8 @@ if(id != null){
     <input type="submit" value="Submit">
 </form>
 
-<br><br>
+<br>
+<h2>(Enter "9999" into all boxes below to delete product)</h2><br>
 <form name="MyForm" method=post action="updateProduct.jsp">
     <input name="productId" type="hidden" value=<% out.print(id); %>>
     <table style="display:inline">
