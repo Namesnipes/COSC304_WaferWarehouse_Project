@@ -73,6 +73,7 @@ CREATE TABLE product (
     productImage        VARBINARY(MAX),
     productDesc         VARCHAR(1000),
     categoryId          INT,
+    productReview       VARCHAR(1000),
     PRIMARY KEY (productId),
     FOREIGN KEY (categoryId) REFERENCES category(categoryId)
 );

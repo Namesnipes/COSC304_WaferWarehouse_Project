@@ -96,8 +96,9 @@ while(rst.next()){
 					URLEncoder.encode(productPrice, StandardCharsets.UTF_8) + "&img="+
 					URLEncoder.encode(productImg,StandardCharsets.UTF_8);
 
-	String updateProdUrl = "updateProductPage.jsp?id=" + productId + "&name=" + productName;
+	String updateProdUrl = "updateProductPage.jsp?id=" + productId;
 
+	String reviewProdUrl ="reviewProd.jsp?id=" + productId;
 
 	String productPage = "product.jsp?id=" + URLEncoder.encode(productId, StandardCharsets.UTF_8);
 	out.print("<tr>");
@@ -115,7 +116,7 @@ while(rst.next()){
 	}
 	out.print("</td>");
 	out.print("<td>"+currFormat.format(rst.getDouble("productPrice"))+"</td>");
-	out.print("<td><a href='"+url+"'>Add to cart</a><br><br><a href='"+updateProdUrl+"'>Edit Product Info</a></td></tr>");
+	out.print("<td><a href='"+url+"'>Add to cart</a><br><br><a href='"+updateProdUrl+"'>Edit Product Info</a><br><br><a href='"+reviewProdUrl+"'>Leave a Review</a></td></tr>");
 
 }
 out.println("</table>");
