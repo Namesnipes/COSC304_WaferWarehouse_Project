@@ -37,4 +37,4 @@
     }
 
 %>
-<jsp:forward page="product.jsp?=" />
+<jsp:forward page="listprod.jsp?id=" />
