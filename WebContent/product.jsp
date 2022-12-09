@@ -60,9 +60,9 @@ con.setCatalog("orders");
         out.println("<img src=./imgs/" + productImg + " width=100; height=100>");
     }
     if(productReview != null)
-        out.println("<div style=\"position: relative;left: 500px;\"><b>Review: </b>" + rst.getString("productReview") + "</div>");
+        out.println("<div style=\"position: relative;left: 500px; width: 300px;\" ><b>Review: </b>" + rst.getString("productReview") + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Id: </b>" + rst.getString(1) + "</div>");
-    out.println("<div style=\"position: relative;left: 10px;\"><b>Description: </b>" + productDesc + "</div>");
+    out.println("<div style=\"position: relative;left: 10px; width: 250px;\"><b>Description: </b>" + productDesc + "</div>");
     out.println("<div style=\"position: relative;left: 10px;\"><b>Price: </b>" + currFormat.format(pr) + "</div>");
     out.println("<a href=" + url + ">Add to Cart</a>");
     out.println("<a href=\"listprod.jsp\">Continue Shopping</a>");
