@@ -21,33 +21,14 @@ con.setCatalog("orders");
 
 // get info from url
 String productId = request.getParameter("id");
-
-out.print("<form method=\"get\" action=\"reviewProd.jsp\" size=\"200\">" +
-    "<input type=\"hidden\" name=\"id\">" +
+out.print("<form method=\"get\" action=\"addReview.jsp\" size=\"200\">" +
+    "<input type=\"hidden\" name=\"id\" value="+productId+">" +
     "<label>Review: </label><input type=\"text\" name=\"productReview\" size=\"50\"><br>" +
     "<input type=\"submit\" value=\"Submit\"><input type=\"reset\" value=\"Reset\">" +
     "<br>" +
     "</form>");
 
-    try{
-        String newReview = request.getParameter("productReview");
-
-        if(newReview == null)
-        return;
-
-        String sql = "UPDATE product SET productReview = ? WHERE productId = ?";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setString(1, newReview);
-        pstmt.setString(2, productId);
-
-        pstmt.executeUpdate();
-
-    } catch(Exception e){
-        out.print(e);
-    }
-%>
-
+    %>
 
 </div>
 </body>
