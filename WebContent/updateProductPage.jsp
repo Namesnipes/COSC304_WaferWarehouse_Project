@@ -47,7 +47,7 @@ if(id != null){
 
 <form name="autofill" method=get action=updateProductPage.jsp>
     <tr>
-        <p> Product Id; submit to autofill boxes below with existing information:</p> 
+        <p> <h2>Submit to autofill boxes below with existing information:</h2><br>(Enter "9999" into all boxes below to delete product)</p> 
         <%
             out.print("<input type=\"number\" name=\"productId\" value=" + id + "  size=10 maxlength=25>");
         %>
@@ -62,7 +62,7 @@ if(id != null){
     <tr>
         <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Product Name: </font></div></td>
         <% 
-            out.print("<td><input type=\"text\" name=\"productName\" value=" + productName + "  size=20 maxlength=25></td>");
+            out.print("<td><input type=\"text\" name=\"productName\" value='" + productName + "'  size=20 maxlength=25></td>");
         %>
     </tr>
     <tr>
@@ -92,6 +92,8 @@ if(id != null){
     </table>
     <br/>
     <input class="submit" type="submit" name="Submit" value="Edit Product" <%if(!exists){out.print("disabled");} %> >
+    </form>
+
     </form>
 
 </body>

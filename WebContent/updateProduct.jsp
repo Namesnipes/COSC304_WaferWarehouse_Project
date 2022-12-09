@@ -27,11 +27,14 @@ String updateProduct(JspWriter out,HttpServletRequest request, HttpSession sessi
     String categoryId = request.getParameter("categoryId");
     String productDesc = request.getParameter("productDesc");
     String productPrice = request.getParameter("productPrice");
+
+    String updateProdString = "";
+    
     try{
         getConnection();
 		con.setCatalog("orders");
 
-        String updateProdString = "UPDATE product SET productName = ?, categoryId = ?, productDesc = ?, productPrice = ? WHERE productId = ?";
+        updateProdString = "UPDATE product SET productName = ?, categoryId = ?, productDesc = ?, productPrice = ? WHERE productId = ?";
         PreparedStatement pstmt = con.prepareStatement(updateProdString);
         pstmt.setString(1, productName);
         pstmt.setString(2, categoryId);

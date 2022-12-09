@@ -23,7 +23,7 @@ con.setCatalog("orders");
 String productId = request.getParameter("id");
 out.print("<form method=\"get\" action=\"addReview.jsp\" size=\"200\">" +
     "<input type=\"hidden\" name=\"id\" value="+productId+">" +
-    "<label>Review: </label><input type=\"text\" name=\"productReview\" size=\"50\"><br>" +
+    "<label>Review: </label><br><textarea type=\"text\" name=\"productReview\" size=\"200\"></textarea><br>" +
     "<input type=\"submit\" value=\"Submit\"><input type=\"reset\" value=\"Reset\">" +
     "<br>" +
     "</form>");

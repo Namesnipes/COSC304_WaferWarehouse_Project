@@ -89,6 +89,10 @@ while(rst.next()){
 	String categoryName = getCategoryNameFromId(categoryId);
 	if(productImg == null) productImg = "";
 
+	if(productName == "9999" && categoryId == 9999 && productPrice == 9999){
+		continue;
+	}		
+
 	//using urlencoder is overkill apparently you could just surround the productname in double quotes ("") but its too late now
 	String url = "addcart.jsp?id=" + 
 					URLEncoder.encode(productId, StandardCharsets.UTF_8) + "&name=" +
