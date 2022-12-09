@@ -24,9 +24,18 @@ String updateProduct(JspWriter out,HttpServletRequest request, HttpSession sessi
     // Get product info from url
     String productId = request.getParameter("productId");
     String productName = request.getParameter("productName");
-    String categoryId = request.getParameter("categoryId");
+    String categoryName = request.getParameter("categoryId");
+    int categoryIdInt = getCategoryIdFromName(categoryName, out);
+    String categoryId = String.valueOf(categoryIdInt);
     String productDesc = request.getParameter("productDesc");
     String productPrice = request.getParameter("productPrice");
+
+    if(productName.equals("9999") && categoryId.equals("9999") && productPrice.equals("9999")) {
+        productName = "Deleted Product";
+        productDesc = "Deleted Product";
+        productPrice = "0.00";
+    }
+
 
     String updateProdString = "";
     
@@ -34,13 +43,12 @@ String updateProduct(JspWriter out,HttpServletRequest request, HttpSession sessi
         getConnection();
 		con.setCatalog("orders");
 
-        updateProdString = "UPDATE product SET productName = ?, categoryId = ?, productDesc = ?, productPrice = ? WHERE productId = ?";
+        updateProdString = "UPDATE product SET productName = ?, productDesc = ?, productPrice = ? WHERE productId = ?";
         PreparedStatement pstmt = con.prepareStatement(updateProdString);
         pstmt.setString(1, productName);
-        pstmt.setString(2, categoryId);
-        pstmt.setString(3, productDesc);
-        pstmt.setString(4, productPrice);
-        pstmt.setString(5, productId);
+        pstmt.setString(2, productDesc);
+        pstmt.setString(3, productPrice);
+        pstmt.setString(4, productId);
         int rows = pstmt.executeUpdate();
         return "<h2> Products updated in database: " + rows + "</h2><h2><a href=updateProductPage.jsp> Update another</a> or go to the home page";
 
