@@ -6,10 +6,11 @@
 <%@ include file="auth.jsp" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.lang.*" %>
-
+<link rel="stylesheet" href="./style.css">
+<%@ include file="header.jsp" %>
 <%
 try{
-    updateProduct(out, request, session);
+    out.print(updateProduct(out, request, session));
 } catch(IOException e){
     System.err.println(e);
 }
@@ -21,37 +22,24 @@ NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 String updateProduct(JspWriter out,HttpServletRequest request, HttpSession session) throws IOException{
     
     // Get product info from url
-    String productId = request.getParameter("id");
-    String productName = request.getParameter("name");
-    String categoryName = request.getParameter("categoryName");
+    String productId = request.getParameter("productId");
+    String productName = request.getParameter("productName");
+    String categoryId = request.getParameter("categoryId");
     String productDesc = request.getParameter("productDesc");
-    String productPrice = request.getParameter("price");
-
+    String productPrice = request.getParameter("productPrice");
     try{
         getConnection();
 		con.setCatalog("orders");
 
-        String updateProdString = "UPDATE product SET";
-
-        if(productName != null){
-            updateProdString += " productName = "+ productId;
-        }
-        else if(categoryName != null){
-            updateProdString += " categoryId = "+ getCategoryIdFromName(categoryName, out);
-        }
-        else if(productDesc != null){
-            updateProdString += " productDesc = "+productDesc;
-        }
-        else if(productPrice != null){
-            updateProdString += " productPrice = "+productPrice;
-        }
-        else if(updateProdString == "UPDATE product SET"){
-            return "Failed to update product";
-        }
-
-        Statement stmt = con.createStatement();
-        stmt.executeQuery(updateProdString);
-        return "Product updated";
+        String updateProdString = "UPDATE product SET productName = ?, categoryId = ?, productDesc = ?, productPrice = ? WHERE productId = ?";
+        PreparedStatement pstmt = con.prepareStatement(updateProdString);
+        pstmt.setString(1, productName);
+        pstmt.setString(2, categoryId);
+        pstmt.setString(3, productDesc);
+        pstmt.setString(4, productPrice);
+        pstmt.setString(5, productId);
+        int rows = pstmt.executeUpdate();
+        return "<h2> Products updated in database: " + rows + "</h2><h2><a href=updateProductPage.jsp> Update another</a> or go to the home page";
 
     }catch (SQLException ex) {
         out.println(ex);
@@ -64,8 +52,7 @@ String updateProduct(JspWriter out,HttpServletRequest request, HttpSession sessi
                     out.println(ex);
 			}
 		}	 
-    
-    return "";
+    return "<h2> Products failed to update, <a href=updateProductPage.jsp> try again </a> </h2>";
 }
 
 %>
