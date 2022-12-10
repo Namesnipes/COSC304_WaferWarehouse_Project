@@ -3,14 +3,11 @@
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <%@ include file="jdbc.jsp" %>
-<%@ include file="auth.jsp" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.lang.*" %>
 
 <%
 // Connect to database
-    getConnection();
-    con.setCatalog("orders");
 
     try{
         getConnection();
