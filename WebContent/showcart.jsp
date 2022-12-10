@@ -107,7 +107,7 @@ else
 	out.print("</div>");
 
 	//for AJAX
-	String url = "http://" + request.getServerName() + "/" + request.getContextPath();
+	String url = "http://" + request.getServerName() + "" + request.getContextPath();
 	out.print("<script>");
 	/*
 	 * function run(operation, id, quantityElement, price, priceElement) {
