@@ -22,11 +22,11 @@ if (session.getAttribute("loginMessage") != null)
 <table style="display:inline">
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Username:</font></div></td>
-	<td><input type="text" name="username"  size=10 maxlength=10></td>
+	<td><input type="text" name="username"  minlength="1" size=10 maxlength=10></td>
 </tr>
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Password:</font></div></td>
-	<td><input type="password" name="password" size=10 maxlength="10"></td>
+	<td><input type="password" name="password" minlength="1" size=10 maxlength="10"></td>
 </tr>
 </table>
 <br/>

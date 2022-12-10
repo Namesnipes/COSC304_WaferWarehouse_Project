@@ -35,7 +35,7 @@
 				createUser(out,request,session);
 				response.sendRedirect("index.jsp");
 			} else {
-				out.print("NOOOOOOOOOOOOOOOOOOOO");
+				out.print("This is not the right code!");
 			}
 		}
 		//authenticatedUser = createUser(out,request,session);
