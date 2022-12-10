@@ -153,7 +153,7 @@ INSERT INTO category(categoryName) VALUES ('Cookies');
 INSERT INTO category(categoryName) VALUES ('Ice Cream');
 
 INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
-    VALUES ('Stroop-Wafer',1,'A stroop-wafer is a thin, round wafer made from two layers of sweet baked dough held together by caramel filling.',4.99,'stroopwafer.png');
+    VALUES ('Ramon Wafer',1,'A Ramon Wafer is a modified stroopwaffle which is a thin, round wafer made from two layers of sweet baked dough held together by caramel filling. Also has Ramon's face from a hot press on it.',4.99,'stroopwafer.png');
 INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
     VALUES ('Strawberry Donut',2,'A simple strawberry donut.',0.99,'donut.png');
 INSERT product(productName, categoryId, productDesc, productPrice, productImageURL) 
