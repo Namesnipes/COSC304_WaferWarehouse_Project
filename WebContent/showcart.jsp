@@ -107,6 +107,7 @@ else
 	out.print("</div>");
 
 	//for AJAX
+	String url = "http://" + request.getServerName() + "/" + request.getContextPath();
 	out.print("<script>");
 	/*
 	 * function run(operation, id, quantityElement, price, priceElement) {
@@ -149,7 +150,7 @@ else
     xhr.send()
 }
 	 */
-	out.print("function run(e,t,n,a,s){var l=new XMLHttpRequest,o=\"\",r=0;\"add\"===e&&(o=\"http://localhost/shop/addcart.jsp?id=\"+t+\"&name=add\",r=1),\"minus\"===e&&(o=\"http://localhost/shop/addcart.jsp?minus=\"+t,r=-1),l.open(\"GET\",o,!0),l.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var t=parseInt(n.innerText)+r;if(\"minus\"===e&&0===t)t=1;else{var s=parseFloat(document.getElementsByClassName(\"total\")[0].innerText.replace(/[^\\d.-]/g,\"\"));s+=r*a,console.log(Math.round(100*s)/100),document.getElementsByClassName(\"total\")[0].innerText=\"Total: $\"+Math.round(100*s)/100}var l=n.parentElement.parentElement.getElementsByClassName(\"subtotalInfo\")[0];n.innerText=t,console.log(t*a),l.innerText=\"x\"+t+\" = $\"+Math.round(t*a*100)/100}},l.send()}");
+	out.print("function run(e,t,n,a,s){var l=new XMLHttpRequest,o=\"\",r=0;\"add\"===e&&(o=\"" + url + "/addcart.jsp?id=\"+t+\"&name=add\",r=1),\"minus\"===e&&(o=\"http://localhost/shop/addcart.jsp?minus=\"+t,r=-1),l.open(\"GET\",o,!0),l.onreadystatechange=function(){if(4==this.readyState&&200==this.status){var t=parseInt(n.innerText)+r;if(\"minus\"===e&&0===t)t=1;else{var s=parseFloat(document.getElementsByClassName(\"total\")[0].innerText.replace(/[^\\d.-]/g,\"\"));s+=r*a,console.log(Math.round(100*s)/100),document.getElementsByClassName(\"total\")[0].innerText=\"Total: $\"+Math.round(100*s)/100}var l=n.parentElement.parentElement.getElementsByClassName(\"subtotalInfo\")[0];n.innerText=t,console.log(t*a),l.innerText=\"x\"+t+\" = $\"+Math.round(t*a*100)/100}},l.send()}");
 	out.print("</script>");
 	out.println("<h2><a href=\"checkout.jsp\">Check Out</a></h2>");
 	out.println("<h2><a href=\"listprod.jsp\">Continue Shopping</a></h2>");
