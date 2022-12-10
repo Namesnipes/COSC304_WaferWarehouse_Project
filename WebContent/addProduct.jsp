@@ -18,9 +18,9 @@
 
 <form method="get" action="addProduct.jsp" size="200">
     <label>Product Name: </label><input type="text" name="productName" size="50"><br>
-    <label>Category ID: </label><input type="text" name="categoryId" size="20"><br>
+    <label>Category ID: </label><input type="number" name="categoryId" size="20"><br>
     <label>Description: </label><input type="text" name="productDesc" size ="100"><br>
-    <label>Price: </label><input type="text" name="productPrice" size ="20"><br>
+    <label>Price: </label><input type="number" name="productPrice" size ="20"><br>
     <label>Image: </label><input type="file" name="productImageURL">
     
     <input type="submit" value="Submit"><input type="reset" value="Reset">

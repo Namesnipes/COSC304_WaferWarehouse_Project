@@ -40,7 +40,7 @@ if(minus != null){
 	}
 }
 
-if (productList.size() <= 0)
+if (productList == null || productList.size() <= 0)
 {	out.println("<h1>Your shopping cart is empty!</h1>");
 	productList = new HashMap<String, ArrayList<Object>>();
 }
